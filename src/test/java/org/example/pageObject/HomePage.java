@@ -16,4 +16,22 @@ public class HomePage {
     //раздел "Начинки"
     private final By fillingSection = By.xpath(".//span[(@class='text text_type_main-default' and text()='Начинки')]");
 
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+    }
+    public void pushMainSighInButton(){driver.findElement(mainSignInButton).click();}
+    public void pushMyAccountButton(){driver.findElement(myAccount).click();}
+    public boolean selectBreadSectionButton(){
+        driver.findElement(breadSection).click();
+        return driver.findElement(breadSection).getAttribute("class").contains("current");
+    }
+    public boolean selectSauceSectionButton(){
+        driver.findElement(sauceSection).click();
+        return driver.findElement(sauceSection).getAttribute("class").contains("current");
+    }
+    public boolean selectFillingSectionButton(){
+        driver.findElement(fillingSection).click();
+        return driver.findElement(fillingSection).getAttribute("class").contains("current");
+    }
+
 }

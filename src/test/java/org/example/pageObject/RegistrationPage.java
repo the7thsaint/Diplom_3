@@ -1,5 +1,6 @@
 package org.example.pageObject;
 
+import org.example.UserInfo.UserInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -16,7 +17,7 @@ public class RegistrationPage {
     }
 
     public void insertUserName(String name){
-        driver.findElement(userEmailInput).sendKeys(name);
+        driver.findElement(userNameInput).sendKeys(name);
     }
 
     public void insertUserEmail(String email){
@@ -33,6 +34,12 @@ public class RegistrationPage {
 
     public boolean checkWrongPasswordMessage(){
         return driver.findElement(wrongPasswordMessage).isDisplayed();
+    }
+
+    public void userData(UserInfo userInfo){
+        insertUserName(userInfo.getName());
+        insertUserEmail(userInfo.getEmail());
+        insertUserPassword(userInfo.getPassword());
     }
 
 }

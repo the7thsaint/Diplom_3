@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class SignInPage {
     private final WebDriver driver;
     private final By userEmailInput = By.xpath(".//label[text()='Email']/..//input");
@@ -36,6 +38,6 @@ public class SignInPage {
     public void insertCredintalsAndButtonClick(UserInfo userInfo){
         insertEmail(userInfo.getEmail());
         insertPassword(userInfo.getPassword());
-        loginButtonClick();
+        driver.findElement(loginButton).click();
     }
 }

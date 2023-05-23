@@ -1,49 +1,72 @@
 package org.example;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
 import org.example.UserInfo.UserInfo;
 import org.example.UserInfo.UserRandomizer;
 import org.example.UserInfo.UserSteps;
+import org.example.pageObject.Constants;
 import org.example.pageObject.HomePage;
+import org.example.pageObject.RegistrationPage;
 import org.example.pageObject.SignInPage;
 import org.junit.*;
-import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
 
-public class LoginUserTest extends BaseTest {
-    public static UserRandomizer userRandomizer;
-    public static UserSteps userSteps;
+public class LoginUserTest {
+
     public static UserInfo userInfo;
-//    public static WebDriver driver;
     public static SignInPage signInPage;
-    public static HomePage homePage;
+    public HomePage homePage;
     public static String accessToken;
+    public static WebDriver driver;
 
-//    @BeforeClass
-//    public static void setUp(){
-//        userInfo = new UserInfo();
-//        userRandomizer = new UserRandomizer();
-//        userInfo = userRandomizer.userWithRandomData();
-//        accessToken = userSteps.createNewUser(userInfo).path("accessToken");
-//    }
-//    @AfterClass
-//    public static void deleteTestUsers(){
-//        userSteps.deleteUser(accessToken);
-//    }
+    @Before
+    public void startUp() {
 
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        homePage = new HomePage(driver);
+        signInPage = new SignInPage(driver);
+        RestAssured.baseURI = Constants.BURGER_MAIN_PAGE;
+        userInfo = UserRandomizer.userWithRandomData();
+        accessToken = UserSteps.createNewUser(userInfo).path("accessToken");
+    }
+
+    @After
+   public void teardown() {
+       // Закрой браузер
+        driver.quit();
+            if(accessToken !=null){
+        UserSteps.deleteUser(accessToken);
+    }
+    }
+
+    @BeforeClass
+    public static void beforeClass(){
+        RestAssured.baseURI = Constants.BURGER_MAIN_PAGE;
+        userInfo = UserRandomizer.userWithRandomData();
+        accessToken = UserSteps.createNewUser(userInfo).path("accessToken");
+    }
+    @AfterClass
+    public static void afterClass(){
+        if(accessToken !=null){
+            UserSteps.deleteUser(accessToken);
+        }
+    }
 
     @Test
     @DisplayName("Авторизация по кнопке Войти в аккаунт")
     public void testLoginFromHomePageLoginButton(){
-        homePage = new HomePage(driver);
-        signInPage = new SignInPage(driver);
-        userInfo = new UserInfo();
-        userRandomizer = new UserRandomizer();
-        userInfo = userRandomizer.userWithRandomData();
-//        accessToken = userSteps.createNewUser(userInfo).path("accessToken");
+        driver.get(Constants.BURGER_MAIN_PAGE);
         homePage.waitingForMainPageLoading();
         homePage.pushMainSighInButton();
         signInPage.insertCredintalsAndButtonClick(userInfo);
@@ -53,19 +76,30 @@ public class LoginUserTest extends BaseTest {
     @Test
     @DisplayName("Авторизация по кнопке Личный кабинет")
     public void testLoginFromHomePageMyAccountButton(){
-        homePage = new HomePage(driver);
-        signInPage = new SignInPage(driver);
+        driver.get(Constants.BURGER_MAIN_PAGE);
         homePage.waitingForMainPageLoading();
         homePage.pushMyAccountButton();
         signInPage.insertCredintalsAndButtonClick(userInfo);
         assertTrue("Вход выполнен", homePageSuccessLogin());
     }
 
+    @Test
+    @DisplayName("Проверка авторизации на странице регистрация")
+    public void testLoginFromRegisterPage(){
+        driver.get(Constants.BURGER_MAIN_PAGE+Constants.REGISTER_PAGE);
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.clickLoginButton();
+        signInPage.insertCredintalsAndButtonClick(userInfo);
+        assertTrue("Вход выполнен", homePageSuccessLogin());
+    }
+
     @Step
-    public boolean homePageSuccessLogin(){
+    public static boolean homePageSuccessLogin(){
+        HomePage homePage = new HomePage(driver);
         homePage.waitingForMainPageLoading();
         return homePage.orderButtonIsDisplayed();
     }
+
 
 
 }

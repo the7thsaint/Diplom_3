@@ -13,6 +13,7 @@ public class RegistrationPage {
     private final By userPasswordInput = By.xpath(".//label[text()='Пароль']/..//input");
     private final By registrationButton = By.xpath(".//button[text()='Зарегистрироваться']");
     private final By wrongPasswordMessage = By.xpath(".//p[text()='Некорректный пароль']");
+    private final By loginButton = By.xpath(".//a[text()='Войти']");
 
     public RegistrationPage(WebDriver driver){
         this.driver = driver;
@@ -36,6 +37,9 @@ public class RegistrationPage {
 
     public boolean checkWrongPasswordMessage(){
         return driver.findElement(wrongPasswordMessage).isDisplayed();
+    }
+    public void clickLoginButton(){
+        driver.findElement(loginButton).click();
     }
 
     public void userData(UserInfo userInfo){

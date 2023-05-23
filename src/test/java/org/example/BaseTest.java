@@ -2,14 +2,10 @@ package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.example.pageObject.Constants;
-import org.example.pageObject.HomePage;
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.concurrent.TimeUnit;
 

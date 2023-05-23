@@ -4,8 +4,10 @@ import org.example.UserInfo.UserInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+
 public class RegistrationPage {
     WebDriver driver;
+
     private final By userNameInput = By.xpath(".//label[text()='Имя']/..//input");
     private final By userEmailInput = By.xpath(".//label[text()='Email']/..//input");
     private final By userPasswordInput = By.xpath(".//label[text()='Пароль']/..//input");

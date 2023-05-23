@@ -19,8 +19,6 @@ public class BurgerConstructorTest  {
     @Before
     public void startUp() {
 
-        // WebDriverManager.firefoxdriver().setup();
-        // driver = new FirefoxDriver();
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get(Constants.BURGER_MAIN_PAGE);

@@ -13,7 +13,7 @@ public class SignInPage {
     private final By userEmailInput = By.xpath(".//label[text()='Email']/..//input");
     private final By userPasswordInput = By.xpath(".//label[text()='Пароль']/..//input");
     private final By loginButton = By.xpath(".//button[text()='Войти']");
-    private final By loginTitle = By.className("button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa");
+    private final By loginTitle = By.xpath(".//h2[text()='Вход']");
 
     public SignInPage(WebDriver driver) {
         this.driver = driver;

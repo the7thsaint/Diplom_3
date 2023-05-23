@@ -8,5 +8,6 @@ public class Constants {
     public final static String USER = "/api/auth/user";
     public final static String FORGOT_PASSWORD = "/forgot-password";
     public final static String LOGIN_PAGE = "/login";
+    public final static String USER_PROFILE = "/account/profile";
 
 }

@@ -40,10 +40,10 @@ public class RegisterUserTests {
 
     @After
     public void teardown(){
-        driver.quit();
         if(accessToken !=null){
             UserSteps.deleteUser(accessToken);
         }
+        driver.quit();
     }
 
     @Test

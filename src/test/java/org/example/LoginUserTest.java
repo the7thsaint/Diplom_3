@@ -47,18 +47,6 @@ public class LoginUserTest {
     }
     }
 
-    @BeforeClass
-    public static void beforeClass(){
-        RestAssured.baseURI = Constants.BURGER_MAIN_PAGE;
-        userInfo = UserRandomizer.userWithRandomData();
-        accessToken = UserSteps.createNewUser(userInfo).path("accessToken");
-    }
-    @AfterClass
-    public static void afterClass(){
-        if(accessToken !=null){
-            UserSteps.deleteUser(accessToken);
-        }
-    }
 
     @Test
     @DisplayName("Авторизация по кнопке Войти в аккаунт")

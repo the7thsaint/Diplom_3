@@ -42,10 +42,11 @@ public class RegistrationPage {
         driver.findElement(loginButton).click();
     }
 
-    public void userData(UserInfo userInfo){
+    public void insertUserDataAndClick(UserInfo userInfo){
         insertUserName(userInfo.getName());
         insertUserEmail(userInfo.getEmail());
         insertUserPassword(userInfo.getPassword());
+        clickRegisterButton();
     }
 
 }

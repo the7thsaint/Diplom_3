@@ -11,15 +11,17 @@ public class HomePage {
 
     private final WebDriver driver;
     // Кнопка "Войти в аккаунт"
-    private final By mainSignInButton = By.className("button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg");
+    private final By mainSignInButton = By.xpath(".//button[text()='Войти в аккаунт']");
     //кнопка «Личный кабинет»
-    private final By myAccount = By.xpath(".//p[(@class='AppHeader_header__linkText__3q_va ml-2' and text()='Личный Кабинет')]");
+    private final By myAccount = By.xpath(".//p[text()='Личный Кабинет']");
     //раздел "Булки"
     private final By breadSection = By.xpath(".//span[text()='Булки']/..");
     //раздел "Соусы"
     private final By sauceSection = By.xpath(".//span[text()='Соусы']/..");
     //раздел "Начинки"
     private final By fillingSection = By.xpath(".//span[text()='Начинки']/..");
+    private final By orderPlaceButton = By.xpath(".//button[text()='Оформить заказ']");
+    private final By createBurgerText = By.xpath(".//*[text()='Соберите бургер']");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -59,6 +61,10 @@ public class HomePage {
 
     public void waitingForMainPageLoading() {
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(mainSignInButton));
+                .until(ExpectedConditions.visibilityOfElementLocated(createBurgerText));
+    }
+
+    public boolean orderButtonIsDisplayed(){
+        return driver.findElement(orderPlaceButton).isDisplayed();
     }
 }

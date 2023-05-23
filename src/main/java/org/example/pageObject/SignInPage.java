@@ -11,7 +11,7 @@ public class SignInPage {
     private final By userEmailInput = By.xpath(".//label[text()='Email']/..//input");
     private final By userPasswordInput = By.xpath(".//label[text()='Пароль']/..//input");
     private final By loginButton = By.xpath(".//button[text()='Войти']");
-    private final By loginTitle = By.xpath(".//*[text() = 'Вход']");
+    private final By loginTitle = By.className("button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa");
 
     public SignInPage(WebDriver driver) {
         this.driver = driver;
@@ -29,7 +29,9 @@ public class SignInPage {
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(loginTitle));
     }
 
-    public void loginButtonClick(){driver.findElement(loginButton).click();}
+    public void loginButtonClick(){
+        driver.findElement(loginButton).click();
+    }
 
     public void insertCredintalsAndButtonClick(UserInfo userInfo){
         insertEmail(userInfo.getEmail());

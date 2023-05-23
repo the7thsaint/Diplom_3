@@ -24,5 +24,12 @@ public class UserSteps {
                 .post(Constants.LOGIN);
     }
 
+    @Step("Удаление пользователя")
+    public Response deleteUser(String accessToken){
+        return given()
+                .header("authorization", accessToken)
+                .delete(Constants.USER);
+    }
+
 
 }

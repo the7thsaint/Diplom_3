@@ -7,10 +7,7 @@ import io.restassured.RestAssured;
 import org.example.UserInfo.UserInfo;
 import org.example.UserInfo.UserRandomizer;
 import org.example.UserInfo.UserSteps;
-import org.example.pageObject.Constants;
-import org.example.pageObject.HomePage;
-import org.example.pageObject.RegistrationPage;
-import org.example.pageObject.SignInPage;
+import org.example.pageObject.*;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -92,6 +89,18 @@ public class LoginUserTest {
         signInPage.insertCredintalsAndButtonClick(userInfo);
         assertTrue("Вход выполнен", homePageSuccessLogin());
     }
+
+    @Test
+    @DisplayName("Проверка авторизации со страницы восстановления пароля")
+    public void testLoginFromForgotPasswordPage(){
+        driver.get(Constants.BURGER_MAIN_PAGE+Constants.FORGOT_PASSWORD);
+        ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driver);
+        forgotPasswordPage.signInButtonPush();
+        signInPage.insertCredintalsAndButtonClick(userInfo);
+        assertTrue("Вход выполнен", homePageSuccessLogin());
+    }
+
+
 
     @Step
     public static boolean homePageSuccessLogin(){

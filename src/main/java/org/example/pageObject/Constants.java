@@ -6,5 +6,6 @@ public class Constants {
     public static final String LOGIN = "api/auth/login";
     public static final String REGISTER = "api/auth/register";
     public final static String USER = "/api/auth/user";
+    public final static String FORGOT_PASSWORD = "/forgot-password";
 
 }

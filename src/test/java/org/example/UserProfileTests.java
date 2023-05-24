@@ -63,12 +63,43 @@ public class UserProfileTests {
     @DisplayName("Выход из профиля кнопкой Выход")
     public void testExitProfile(){
         homePage.pushMyAccountButton();
-        //driver.get(Constants.BURGER_MAIN_PAGE+Constants.USER_PROFILE);
         userProfilePage.waitingUserProfileLoad();
         userProfilePage.pushProfileExitButton();
         signInPage.waitingLoginPage();
         assertEquals("Пользователь перешел на страницу логина", Constants.BURGER_MAIN_PAGE+Constants.LOGIN_PAGE,driver.getCurrentUrl());
     }
+
+    @Test
+    @DisplayName("Переход на главную после нажатия на лого")
+    public void testMoveToMainPageAfterPuckLogo(){
+        homePage.pushMyAccountButton();
+        userProfilePage.waitingUserProfileLoad();
+        userProfilePage.pushLogoButton();
+        homePage.waitingForMainPageLoading();
+        assertEquals("Пользователь перешел на главную страницу", Constants.BURGER_MAIN_PAGE+"/",driver.getCurrentUrl());
+    }
+
+    @Test
+    @DisplayName("Переход в профиль пользователя по кнопке Личный кабинет")
+    public void testMoveToUserProfile(){
+        homePage.pushMyAccountButton();
+        userProfilePage.waitingUserProfileLoad();
+        assertEquals("Пользователь перешел на страницу личного кабинета", Constants.BURGER_MAIN_PAGE+Constants.USER_PROFILE,driver.getCurrentUrl());
+    }
+
+    @Test
+    @DisplayName("Переход к конструктору по кнопке Конструктор")
+    public void testMoveToConstructorAfterPushConstructorButton(){
+        homePage.pushMyAccountButton();
+        userProfilePage.waitingUserProfileLoad();
+        userProfilePage.pushConstructorButton();
+        homePage.waitingForMainPageLoading();
+        assertEquals("Пользователь перешел на главную страницу", Constants.BURGER_MAIN_PAGE+"/",driver.getCurrentUrl());
+    }
+
+
+
+
 
 
 }

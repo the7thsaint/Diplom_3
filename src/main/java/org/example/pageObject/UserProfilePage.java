@@ -21,15 +21,15 @@ public class UserProfilePage {
     }
 
     public void pushProfileButton(){
-        driver.findElement(userProfileButton);
+        driver.findElement(userProfileButton).click();
     }
 
     public void pushConstructorButton(){
-        driver.findElement(constructorButton);
+        driver.findElement(constructorButton).click();
     }
 
     public void pushLogoButton(){
-        driver.findElement(stellarLogoButton);
+        driver.findElement(stellarLogoButton).click();
     }
 
     public void waitingUserProfileLoad() {

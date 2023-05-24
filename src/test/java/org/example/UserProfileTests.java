@@ -10,6 +10,7 @@ import org.example.pageObject.Constants;
 import org.example.pageObject.HomePage;
 import org.example.pageObject.SignInPage;
 import org.example.pageObject.UserProfilePage;
+import org.example.webDriverSettings.WebDriverSettings;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -32,9 +33,7 @@ public class UserProfileTests {
 
     @Before
     public void startUp(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver = WebDriverSettings.setBrowser();
         homePage = new HomePage(driver);
         signInPage = new SignInPage(driver);
         userProfilePage = new UserProfilePage(driver);
@@ -51,13 +50,9 @@ public class UserProfileTests {
     public void tearDown(){
         // Закрой браузер
         driver.quit();
+        UserSteps.deleteUser(accessToken);
         }
 
-
-    @AfterClass
-    public static void cleanData(){
-        UserSteps.deleteUser(accessToken);
-    }
 
     @Test
     @DisplayName("Выход из профиля кнопкой Выход")

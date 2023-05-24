@@ -1,6 +1,5 @@
 package org.example.UserInfo;
 import io.qameta.allure.Step;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.example.pageObject.Constants;
@@ -25,11 +24,13 @@ public class UserSteps {
                 .post(Constants.LOGIN);
     }
 
+
     @Step("Удаление пользователя")
     public static Response deleteUser(String accessToken){
+        String url = Constants.USER;
         return given()
-                .header("authorization", accessToken)
-                .delete(Constants.USER);
+                .header("Authorization", accessToken)
+                .delete(url);
     }
 
 

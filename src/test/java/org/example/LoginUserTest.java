@@ -8,6 +8,7 @@ import org.example.UserInfo.UserInfo;
 import org.example.UserInfo.UserRandomizer;
 import org.example.UserInfo.UserSteps;
 import org.example.pageObject.*;
+import org.example.webDriverSettings.WebDriverSettings;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,9 +29,7 @@ public class LoginUserTest {
     @Before
     public void startUp() {
 
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver = WebDriverSettings.setBrowser();
         homePage = new HomePage(driver);
         signInPage = new SignInPage(driver);
         RestAssured.baseURI = Constants.BURGER_MAIN_PAGE;
@@ -42,12 +41,9 @@ public class LoginUserTest {
    public void teardown() {
        // Закрой браузер
         driver.quit();
-    }
-
-    @AfterClass
-    public static void cleanData(){
         UserSteps.deleteUser(accessToken);
     }
+
 
 
     @Test

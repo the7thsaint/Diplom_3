@@ -3,12 +3,14 @@ package org.example;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.example.pageObject.Constants;
 import org.example.pageObject.HomePage;
+import org.example.webDriverSettings.WebDriverSettings;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,9 +20,7 @@ public class BurgerConstructorTest  {
 
     @Before
     public void startUp() {
-
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = WebDriverSettings.setBrowser();
         driver.get(Constants.BURGER_MAIN_PAGE);
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     }

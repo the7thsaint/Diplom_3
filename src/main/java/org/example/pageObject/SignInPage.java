@@ -28,7 +28,7 @@ public class SignInPage {
     }
 
     public void waitingLoginPage(){
-        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(loginTitle));
+        new WebDriverWait(driver, 8).until(ExpectedConditions.visibilityOfElementLocated(loginTitle));
     }
 
     public void loginButtonClick(){

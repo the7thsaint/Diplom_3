@@ -3,6 +3,8 @@ package org.example.pageObject;
 import org.example.UserInfo.UserInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class RegistrationPage {
@@ -40,6 +42,9 @@ public class RegistrationPage {
     }
     public void clickLoginButton(){
         driver.findElement(loginButton).click();
+    }
+    public void waitingForSignUpPageLoading() {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(registrationButton));
     }
 
     public void insertUserDataAndClick(UserInfo userInfo){

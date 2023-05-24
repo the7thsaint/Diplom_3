@@ -10,6 +10,7 @@ import org.example.pageObject.Constants;
 import org.example.pageObject.RegistrationPage;
 import org.example.pageObject.SignInPage;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +34,7 @@ public class RegisterUserTests {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         registrationPage = new RegistrationPage(driver);
+        signInPage = new SignInPage(driver);
         RestAssured.baseURI = Constants.BURGER_MAIN_PAGE;
         userInfo = UserRandomizer.userWithRandomData();
         accessToken = UserSteps.createNewUser(userInfo).path("accessToken");
@@ -40,20 +42,25 @@ public class RegisterUserTests {
 
     @After
     public void teardown(){
-        if(accessToken !=null){
-            UserSteps.deleteUser(accessToken);
-        }
         driver.quit();
+    }
+    @AfterClass
+    public static void cleanData(){
+        UserSteps.deleteUser(accessToken);
     }
 
     @Test
     @DisplayName("Проверка успешной регистрации")
     public void testSuccessRegister(){
         driver.get(Constants.BURGER_MAIN_PAGE+Constants.REGISTER_PAGE);
+        userInfo.setPassword("123456");
+        userInfo.setEmail("sdqqqqfqfq@re.uy");
+        userInfo.setName("Chak");
         registrationPage.insertUserDataAndClick(userInfo);
+        signInPage.waitingLoginPage();
         assertEquals("Переход на страницу логина", Constants.BURGER_MAIN_PAGE+Constants.LOGIN_PAGE,driver.getCurrentUrl());
     }
-    //Фэйкер перестал выдавать уникальные значение, надо подумать как зарандомить еще
+
 
     @Test
     @DisplayName("Проверка вывода напдиси о некорректном пароле")

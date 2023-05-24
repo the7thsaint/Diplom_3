@@ -40,11 +40,13 @@ public class LoginUserTest {
 
     @After
    public void teardown() {
-        if(accessToken !=null){
-            UserSteps.deleteUser(accessToken);
-        }
        // Закрой браузер
         driver.quit();
+    }
+
+    @AfterClass
+    public static void cleanData(){
+        UserSteps.deleteUser(accessToken);
     }
 
 

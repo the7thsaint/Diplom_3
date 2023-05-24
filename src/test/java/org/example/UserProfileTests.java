@@ -11,6 +11,7 @@ import org.example.pageObject.HomePage;
 import org.example.pageObject.SignInPage;
 import org.example.pageObject.UserProfilePage;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -48,11 +49,14 @@ public class UserProfileTests {
 
     @After
     public void tearDown(){
-        if(accessToken !=null){
-            UserSteps.deleteUser(accessToken);
         // Закрой браузер
         driver.quit();
         }
+
+
+    @AfterClass
+    public static void cleanData(){
+        UserSteps.deleteUser(accessToken);
     }
 
     @Test

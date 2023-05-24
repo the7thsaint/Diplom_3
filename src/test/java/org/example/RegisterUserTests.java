@@ -50,7 +50,7 @@ public class RegisterUserTests {
 
 
     @Test
-    @DisplayName("Проверка успешной регистрации")
+    @DisplayName("Проверка успешной регистрации пользователя")
     public void testSuccessRegister(){
         UserInfo userInfo = UserRandomizer.userWithRandomData();
         signInPage = new SignInPage(driver);

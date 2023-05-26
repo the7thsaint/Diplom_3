@@ -1,6 +1,5 @@
 package org.example;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.example.UserInfo.UserInfo;
@@ -12,13 +11,9 @@ import org.example.pageObject.SignInPage;
 import org.example.pageObject.UserProfilePage;
 import org.example.webDriverSettings.WebDriverSettings;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.example.LoginUserTest.signInPage;
 import static org.junit.Assert.assertEquals;

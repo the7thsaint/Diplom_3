@@ -1,6 +1,5 @@
 package org.example;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.example.pageObject.Constants;
 import org.example.pageObject.HomePage;
 import org.example.webDriverSettings.WebDriverSettings;
@@ -9,9 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.util.concurrent.TimeUnit;
 
 
@@ -30,7 +26,6 @@ public class BurgerConstructorTest  {
         // Закрой браузер
         driver.quit();
     }
-
 
     @Test
     public void testCorrectSelectBreadSection(){
@@ -53,8 +48,4 @@ public class BurgerConstructorTest  {
         homePage.clickFillingSection();
         Assert.assertTrue("Выбрана секция с начинками", homePage.selectFillingSectionButton());
     }
-
-
-
-
 }
